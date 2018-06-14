@@ -59,7 +59,41 @@ var person = {
 
 person.age = 999;
 person['eyeColour'] = 'red';
-console.log(person);
+// console.log(person);
 for (var key in person) {
-  console.log(person[key]);
+  // console.log(person[key]);
 }
+
+
+function count() {
+  var counter = 0;
+
+  function child() {
+    return ++counter;
+  }
+
+  return child;
+}
+
+count = count();
+console.log(count);
+console.log(count());
+console.log(count());
+console.log(count());
+console.log(count());
+console.log(count());
+console.log(count());
+console.log(count());
+console.log(count());
+console.log(count());
+console.log(count());
+console.log(count());
+console.log(count());
+console.log(count());
+
+// count() => 1
+// count() => 2
+// count() => 3
+// count() => 4
+// count() => 5
+// count() => 6
