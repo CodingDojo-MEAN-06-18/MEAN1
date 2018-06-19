@@ -19,7 +19,7 @@ function Person(name, items) {
 
 Person.prototype.take = function take(item, target) {
     // protect code to retrieve item
-    console.log('this is ', this);
+    console.log('this is ', item);
   if (!target || !Array.isArray(target.items)) {
     console.log('target has no items');
     throw new Error('target must have an items array');
@@ -43,8 +43,8 @@ const jason = Person('Jason', ['phone', 'keys', 'money']);
 const bob = new Person('Bob', ['lint', 'gum', 'gold']); // ['gold']
 
 // console.log(jason.name); // Jason
-console.log(jason);
-console.log(jason instanceof Person);
+// console.log(jason);
+// console.log(jason instanceof Person);
 
 
 
@@ -53,3 +53,19 @@ bob.take('money', jason);
 
 console.log(jason);
 console.log(bob);
+
+const backpack = {
+  items: ['map', 'compass', 'trailmix'],
+};
+// backpack.take = jason.take;
+console.log(backpack);
+
+jason.take('trailmix', backpack);
+// backpack.take('gold', jason);
+
+const bound = bob.take.bind(backpack, 'gold');
+
+console.log(bound(jason));
+console.log(bob);
+console.log(jason);
+console.log(backpack);
