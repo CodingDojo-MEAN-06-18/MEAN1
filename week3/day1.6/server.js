@@ -19,8 +19,28 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(logger);
 app.use(function (request, response, next) {
   console.log(next);
-  next(new Error('Whoops! Something went wrong!!!'));
+  // next(new Error('Whoops! Something went wrong!!!'));
+  next();
 });
+
+app.use(doSomething({ extended: false }));
+
+function doSomething(state) {
+  console.log('our state => ' + state);
+
+  return function (request, response, next) {
+    console.log('inside our state middleware => ' + state);
+
+    if (state.extended) {
+      // do something if true ,
+    } else {
+      // do something if false
+    }
+
+
+    next();
+  };
+}
 
 app.get('/', function (request, response) {
   console.log('index route');

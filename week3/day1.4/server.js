@@ -21,9 +21,26 @@ app.use(function (request, response, next) {
   console.log(next);
   // something went wrong!!!
 
-  next(new Error('Something went wrong!'));
+  // next(new Error('Something went wrong!'));
+
+  next();
 });
 
+app.use(doSomething(true));
+
+function doSomething(doSomethingIfTrue) {
+  return function (request, response, next) {
+    console.log('inside middleware', doSomethingIfTrue);
+
+    if (doSomethingIfTrue) {
+      // do something
+    } else {
+      // don't do something
+    }
+
+    next();
+  };
+};
 
 app.get('/', function (request, response) {
   console.log('inside index route');
@@ -33,7 +50,7 @@ app.get('/', function (request, response) {
   response.render('index');
 });
 
-app.post('/process', [function () { }], function (request, response) {
+app.post('/process', function (request, response) {
   console.log('body ', request.body);
 
   names.push(request.body.name);
